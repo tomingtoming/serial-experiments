@@ -1,0 +1,35 @@
+version: "3.7"
+services: 
+  config-server:
+    image: gradle:4.10.0-jdk-alpine
+    volumes:
+      - ./config-server:/home/gradle/project
+      - ~/.gradle:/home/gradle/.gradle
+    working_dir: /home/gradle/project
+    command: gradle bootRun
+    expose:
+      - "8081"
+  discovery-server:
+    image: gradle:4.10.0-jdk-alpine
+    volumes:
+      - ./discovery-server:/home/gradle/project
+      - ~/.gradle:/home/gradle/.gradle
+    working_dir: /home/gradle/project
+    command: gradle bootRun
+    expose:
+      - "8082"
+    ports:
+      - "8082:8082"
+    depends_on: 
+      - config-server
+    environment: 
+      CONFIG_URL: http://config-server:8081
+  frontend:
+    build: frontend
+    volumes:
+      - ./frontend:/source
+    command: elm-app start
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
