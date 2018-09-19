@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'space.plasmic'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version:'1.6.0'
+    testCompile group: 'com.thoughtworks.gauge', name: 'gauge-java', version:'0.6.7'
+    testCompile group: 'org.assertj', name: 'assertj-core', version:'3.10.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.0.1'
+}
