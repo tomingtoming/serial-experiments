@@ -1,10 +1,10 @@
 version: "3.7"
-services: 
+services:
   config-server:
     image: gradle:4.10.0-jdk-alpine
     volumes:
       - ./config-server:/home/gradle/project
-      - ~/.gradle:/home/gradle/.gradle
+      # - ~/.gradle:/home/gradle/.gradle
     working_dir: /home/gradle/project
     command: gradle bootRun
     expose:
@@ -13,16 +13,16 @@ services:
     image: gradle:4.10.0-jdk-alpine
     volumes:
       - ./discovery-server:/home/gradle/project
-      - ~/.gradle:/home/gradle/.gradle
+      # - ~/.gradle:/home/gradle/.gradle
     working_dir: /home/gradle/project
     command: gradle bootRun
     expose:
       - "8082"
     ports:
       - "8082:8082"
-    depends_on: 
+    depends_on:
       - config-server
-    environment: 
+    environment:
       CONFIG_URL: http://config-server:8081
   frontend:
     build: frontend
