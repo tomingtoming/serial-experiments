@@ -1,5 +1,0 @@
-rootProject.name = 'serial-experiments'
-include 'config-server'
-include 'discovery-server'
-include 'gateway-server'
-include 'auth-server'
