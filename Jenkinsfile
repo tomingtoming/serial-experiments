@@ -3,9 +3,9 @@ pipeline {
         docker { image 'gradle:4.10.0-jdk-alpine' }
     }
     stages {
-        stage('Test') {
+        stage('Docker Build') {
             steps {
-                sh 'gradle tasks'
+                sh 'gradle composeBuild'
             }
         }
     }
