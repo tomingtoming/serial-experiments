@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps {
-                sh 'gradle composeBuild'
+                sh 'gradle check'
             }
         }
     }
