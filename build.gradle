@@ -1,18 +1,20 @@
 plugins {
-    id 'com.bmuschko.docker-remote-api' version '3.6.1'
     id 'com.avast.gradle.docker-compose' version '0.8.7'
+    id 'com.bmuschko.docker-remote-api' version '3.6.1'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
 }
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.bmuschko.docker-remote-api'
 
-repositories {
-    mavenCentral()
-}
+dockerCompose.isRequiredBy(test)
 
-//dockerCompose.isRequiredBy(test, gauge)
-
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.*
 
 task buildGaugeContainer(type: DockerBuildImage) {
     inputDir = file('gauge')
