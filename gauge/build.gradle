@@ -1,5 +1,8 @@
 buildscript {
     repositories {
+        maven {
+            url "http://dl.bintray.com/manupsunny/maven"
+        }
         mavenCentral()
     }
     dependencies {
@@ -7,4 +10,35 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
 apply plugin: "gauge"
+
+sourceSets {
+    spec {
+        java.srcDir 'src/spec/java'
+        resources.srcDir 'specs'
+    }
+    test {
+        compileClasspath += sourceSets.spec.runtimeClasspath
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    specCompile 'com.thoughtworks.gauge:gauge-java:0.6.8'
+    testCompile 'com.thoughtworks.gauge:gauge-java:0.6.8'
+    testCompile 'net.sourceforge.htmlunit:webdriver:2.6'
+    testCompile 'junit:junit:4.12'
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:2.53.0'
+}
+
+gauge {
+    specsDir = 'specs'
+    inParallel = true
+    nodes = 4
+    tags = '!dev'
+    additionalFlags = '--verbose --aaaaaaa'
+}
