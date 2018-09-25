@@ -33,5 +33,5 @@ dependencies {
 }
 
 gauge {
-    specsDir = 'mainSpecs'
+    specsDir = 'specs'
 }
