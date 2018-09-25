@@ -1,3 +1,5 @@
+package serial.experiments;
+
 public class Test {
     private String value;
 
