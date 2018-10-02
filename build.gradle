@@ -1,22 +1,30 @@
+buildscript {
+    repositories {
+        maven {
+            url  "http://dl.bintray.com/manupsunny/maven"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.thoughtworks.gauge.gradle:gauge-gradle-plugin:1.7.3'
+    }
+}
+
 plugins {
     id 'com.avast.gradle.docker-compose' version '0.8.7'
     id 'com.bmuschko.docker-remote-api' version '3.6.1'
 }
 
-repositories {
-    mavenCentral()
-    jcenter()
+apply plugin: 'java'
+apply plugin: 'gauge'
+
+dependencies {
+    testCompile('com.thoughtworks.gauge:gauge-java:+')
+    testCompile('net.sourceforge.htmlunit:webdriver:2.6')
+    testCompile('junit:junit:4.12')
+    testCompile('org.seleniumhq.selenium:selenium-firefox-driver:2.53.0')
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'com.bmuschko.docker-remote-api'
-
-dockerCompose.isRequiredBy(test)
-
-import com.bmuschko.gradle.docker.tasks.image.*
-
-task buildGaugeContainer(type: DockerBuildImage) {
-    inputDir = file('gauge')
-    tag = 'tomingtoming/gauge:latest'
+gauge {
+    specsDir = 'specs'
 }

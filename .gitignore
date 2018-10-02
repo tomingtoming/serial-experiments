@@ -1,8 +1,11 @@
-/.gradle/
-.idea/
-build/
-bin/
 *.iml
 .classpath
+.gauge
+.gradle
+.idea
+.logs
 .project
+.reports
 .settings/
+bin/
+build
