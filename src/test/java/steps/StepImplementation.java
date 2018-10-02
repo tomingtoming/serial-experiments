@@ -3,9 +3,10 @@ package steps;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StepImplementation {
 
@@ -18,7 +19,7 @@ public class StepImplementation {
             String url = row.getCell("URL");
             String message = row.getCell("Message");
             driver.get(url);
-            Assertions.assertThat(driver.getPageSource()).contains(message).as(site);
+            assertThat(driver.getPageSource()).contains(message).as(site);
         }
     }
 }
